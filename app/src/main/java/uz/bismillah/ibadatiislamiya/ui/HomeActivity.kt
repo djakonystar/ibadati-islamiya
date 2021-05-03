@@ -1,10 +1,11 @@
-package uz.bismillah.ibadatiislamiya
+package uz.bismillah.ibadatiislamiya.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_home.*
-import uz.bismillah.ibadatiislamiya.fragments.HomePageFragment
+import uz.bismillah.ibadatiislamiya.R
+import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,7 +15,7 @@ class HomeActivity : AppCompatActivity() {
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeMenuItem -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragmentLayout, HomePageFragment())
+//                    supportFragmentManager.beginTransaction().replace(R.id.fragmentLayout, HomePageFragment())
                     true
                 }
                 R.id.bookmarksMenuItem -> {
@@ -32,5 +33,7 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
+
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).commit()
     }
 }

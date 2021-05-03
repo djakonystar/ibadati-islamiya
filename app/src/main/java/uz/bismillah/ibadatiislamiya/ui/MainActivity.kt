@@ -1,9 +1,10 @@
-package uz.bismillah.ibadatiislamiya
+package uz.bismillah.ibadatiislamiya.ui
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import uz.bismillah.ibadatiislamiya.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
