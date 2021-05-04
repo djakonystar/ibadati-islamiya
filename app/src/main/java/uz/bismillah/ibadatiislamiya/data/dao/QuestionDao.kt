@@ -10,8 +10,8 @@ interface QuestionDao {
     fun getAllQuestions() : List<Question>
 
     @Query("SELECT * FROM questions WHERE topic_id IN (:topicIds)")
-    fun loadAllByTopics(topicIds: IntArray) : List<Question>
+    fun getAllByTopics(topicIds: IntArray) : List<Question>
 
     @Query("SELECT * FROM questions WHERE topic_id = (:topicId)")
-    fun loadByTopic(topicId: Int) : Question
+    fun getByTopic(topicId: Int) : Question
 }

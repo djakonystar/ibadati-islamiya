@@ -9,18 +9,6 @@ interface TopicDao {
     @Query("SELECT * FROM topics")
     fun getAllTopics() : List<Topic>
 
-    @Query("SELECT * FROM topics WHERE unit_id = 1")
-    fun getTopicsOfFirstUnit() : List<Topic>
-
-    @Query("SELECT * FROM topics WHERE unit_id = 2")
-    fun getTopicsOfSecondUnit() : List<Topic>
-
-    @Query("SELECT * FROM topics WHERE unit_id = 3")
-    fun getTopicsOfThirdUnit() : List<Topic>
-
-    @Query("SELECT * FROM topics WHERE unit_id = 4")
-    fun getTopicsOfFourthUnit() : List<Topic>
-
-    @Query("SELECT * FROM topics WHERE unit_id = 5")
-    fun getTopicsOfFifthUnit() : List<Topic>
+    @Query("SELECT * FROM topics WHERE unit_id = :unitId")
+    fun getTopicsByUnit(unitId: Int) : List<Topic>
 }

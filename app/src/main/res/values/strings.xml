@@ -9,4 +9,7 @@
     <string name="bismillah_arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</string>
     <string name="bismillah">БИСМИЛЛАҲИР РОҲМАНИР РОҲИЙМ</string>
     <string name="last_read">Ақырғы оқылған</string>
+    <string name="search_by_topic">Тема бойынша излеў</string>
+    <string name="question_title">Сораў:</string>
+    <string name="answer_title">Жуўап:</string>
 </resources>

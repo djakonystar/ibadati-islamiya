@@ -10,10 +10,10 @@ interface AnswerDao {
     fun getAllAnswers() : List<Answer>
 
     @Query("SELECT * FROM answers WHERE question_id IN (:questionIds)")
-    fun loadAllByQuestions(questionIds: IntArray) : List<Answer>
+    fun getAllByQuestions(questionIds: IntArray) : List<Answer>
 
     @Query("SELECT * FROM answers WHERE question_id = (:questionId)")
-    fun loadByQuestion(questionId: Int) : Answer
+    fun getByQuestion(questionId: Int) : Answer
 
     @Query("SELECT * FROM answers WHERE topic_id = 0")
     fun getAllDuas() : List<Answer>

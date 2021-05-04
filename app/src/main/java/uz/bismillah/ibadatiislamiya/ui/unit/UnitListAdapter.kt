@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_unit.view.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.model.Units
@@ -17,6 +18,12 @@ class UnitListAdapter : RecyclerView.Adapter<UnitListAdapter.UnitListViewHolder>
             field = value
             notifyDataSetChanged()
         }
+
+    private var onUnitItemClick : (id: Int) -> Unit = {}
+
+    fun setOnUnitItemClickListener(onUnitItemClick: (id: Int) -> Unit) {
+        this.onUnitItemClick = onUnitItemClick
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UnitListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_unit, parent, false)
@@ -31,10 +38,20 @@ class UnitListAdapter : RecyclerView.Adapter<UnitListAdapter.UnitListViewHolder>
 
     inner class UnitListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(unit: Units) {
-            itemView.unitTitle.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            itemView.unitTitleTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(unit.name, Html.FROM_HTML_MODE_COMPACT)
             } else {
                 Html.fromHtml(unit.name)
+            }
+
+            Glide
+                .with(itemView)
+                .load(itemView.context.resources.getIdentifier(unit.image, "drawable", itemView.context.packageName))
+                .into(itemView.unitIcon)
+
+
+            itemView.setOnClickListener {
+                onUnitItemClick.invoke(unit.id)
             }
         }
     }

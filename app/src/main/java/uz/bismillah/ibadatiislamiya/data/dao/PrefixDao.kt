@@ -10,5 +10,5 @@ interface PrefixDao {
     fun getAllPrefixes() : List<Prefix>
 
     @Query("SELECT * FROM prefixes WHERE topic_id = (:topicId)")
-    fun loadPrefixByTopic(topicId: Int) : Prefix
+    fun getPrefixByTopic(topicId: Int) : Prefix
 }
