@@ -2,6 +2,7 @@ package uz.bismillah.ibadatiislamiya.ui.unit
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_unit.*
 import uz.bismillah.ibadatiislamiya.R
@@ -28,10 +29,16 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
 
         adapter.setOnUnitItemClickListener {
             val bundle = Bundle()
-            val fragment = TopicFragment()
-            bundle.putInt("unitId", it)
-            fragment.arguments = bundle
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.fragmentContainer, fragment)?.addToBackStack(null)?.commit()
+            bundle.putInt(UNIT_ID, it)
+            val fragmentManager = activity?.supportFragmentManager?.beginTransaction()
+            if (it != 6) {
+                val fragment = TopicFragment()
+                fragment.arguments = bundle
+                fragmentManager?.replace(R.id.fragmentContainer, fragment)?.addToBackStack(null)?.commit()
+            } else {
+                //TODO Open duas
+                Toast.makeText(requireContext(), "Open duas", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

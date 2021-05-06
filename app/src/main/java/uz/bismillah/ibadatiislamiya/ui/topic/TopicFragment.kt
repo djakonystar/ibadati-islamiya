@@ -21,7 +21,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
         topicsRecyclerView.adapter = adapter
         topicsRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
         dao = BookDatabase.getInstance(requireContext()).topicDao()
-        setData(arguments?.getInt("unitId") ?: 1)
+        setData(arguments?.getInt(UnitFragment.UNIT_ID) ?: 1)
     }
 
     private fun setData(unitId: Int) {
