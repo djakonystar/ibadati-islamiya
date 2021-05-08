@@ -19,6 +19,7 @@
         app:boxCornerRadiusBottomStart="@dimen/margin_standard"
         app:boxCornerRadiusTopStart="@dimen/margin_standard"
         app:boxStrokeColor="@color/app_color"
+        app:boxBackgroundColor="@color/transparent"
         android:layout_margin="@dimen/margin_eight">
 
         <com.google.android.material.textfield.TextInputEditText
