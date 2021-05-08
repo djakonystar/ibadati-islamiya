@@ -19,6 +19,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="@dimen/margin_standard"
             android:fontFamily="@font/times"
             android:textSize="16sp"
             android:text="@string/answer1"/>
@@ -45,6 +46,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_baseline_bookmark_border_24"
+                android:clickable="true"
+                android:focusable="true"
                 android:padding="16dp"/>
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -52,6 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_outline_share_24"
+                android:clickable="true"
+                android:focusable="true"
                 android:padding="16dp"/>
 
         </LinearLayout>

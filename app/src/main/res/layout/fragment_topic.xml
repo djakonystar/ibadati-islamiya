@@ -13,6 +13,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:hintTextColor="@color/app_color"
+        app:boxCornerRadiusBottomEnd="@dimen/margin_standard"
+        app:boxCornerRadiusTopEnd="@dimen/margin_standard"
+        app:boxCornerRadiusBottomStart="@dimen/margin_standard"
+        app:boxCornerRadiusTopStart="@dimen/margin_standard"
+        app:boxStrokeColor="@color/app_color"
         android:layout_margin="@dimen/margin_eight">
 
         <com.google.android.material.textfield.TextInputEditText

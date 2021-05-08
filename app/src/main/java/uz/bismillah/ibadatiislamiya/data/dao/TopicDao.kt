@@ -11,4 +11,7 @@ interface TopicDao {
 
     @Query("SELECT * FROM topics WHERE unit_id = :unitId")
     fun getTopicsByUnit(unitId: Int) : List<Topic>
+
+    @Query("SELECT has_prefix FROM topics WHERE id = :id")
+    fun hasPrefix(id: Int) : Int
 }

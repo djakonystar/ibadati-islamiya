@@ -9,6 +9,7 @@ import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BookDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.UnitDao
 import uz.bismillah.ibadatiislamiya.ui.SpaceItemDecoration
+import uz.bismillah.ibadatiislamiya.ui.questionanswer.QuestionAnswerFragment
 import uz.bismillah.ibadatiislamiya.ui.topic.TopicFragment
 
 class UnitFragment : Fragment(R.layout.fragment_unit) {
@@ -36,8 +37,10 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
                 fragment.arguments = bundle
                 fragmentManager?.replace(R.id.fragmentContainer, fragment)?.addToBackStack(null)?.commit()
             } else {
-                //TODO Open duas
-                Toast.makeText(requireContext(), "Open duas", Toast.LENGTH_SHORT).show()
+                bundle.putInt(TopicFragment.TOPIC_ID, 0)
+                val fragment = QuestionAnswerFragment()
+                fragment.arguments = bundle
+                fragmentManager?.replace(R.id.fragmentContainer, fragment)?.addToBackStack(null)?.commit()
             }
         }
     }

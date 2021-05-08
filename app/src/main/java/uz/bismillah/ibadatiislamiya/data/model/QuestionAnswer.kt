@@ -3,14 +3,18 @@ package uz.bismillah.ibadatiislamiya.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import uz.bismillah.ibadatiislamiya.data.BaseModelQAPrefix
 
-@Entity(tableName = "questions")
-data class Question(
+@Entity(tableName = "question_answer")
+data class QuestionAnswer(
     @PrimaryKey
     val id: Int,
 
     @ColumnInfo(name = "question")
     val question: String,
+
+    @ColumnInfo(name = "answer")
+    val answer: String,
 
     @ColumnInfo(name = "topic_id")
     val topicId: Int,
@@ -20,4 +24,4 @@ data class Question(
 
     @ColumnInfo(name = "is_favorite")
     val isFavorite: Int
-)
+) : BaseModelQAPrefix(BaseModelQAPrefix.QUESTION_ANSWER)

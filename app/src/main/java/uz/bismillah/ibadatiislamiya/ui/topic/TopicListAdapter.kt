@@ -16,6 +16,12 @@ class TopicListAdapter : RecyclerView.Adapter<TopicListAdapter.TopicListViewHold
             notifyDataSetChanged()
         }
 
+    private var onTopicItemClick : (topicId: Int) -> Unit = {}
+
+    fun setOnTopicItemClickListener(onTopicItemClick : (topicId: Int) -> Unit) {
+        this.onTopicItemClick = onTopicItemClick
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicListViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_topic, parent, false)
         return TopicListViewHolder(itemView)
@@ -30,6 +36,10 @@ class TopicListAdapter : RecyclerView.Adapter<TopicListAdapter.TopicListViewHold
     inner class TopicListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(topic: Topic) {
             itemView.topicTitleTextView.text = topic.name
+
+            itemView.setOnClickListener {
+                onTopicItemClick.invoke(topic.id)
+            }
         }
     }
 }
