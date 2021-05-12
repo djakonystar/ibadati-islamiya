@@ -21,6 +21,12 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        questionAnswerToolBar.title = arguments?.getString(TopicFragment.TOPIC_NAME)
+        questionAnswerToolBar.setNavigationIcon(R.drawable.ic_back_24)
+        questionAnswerToolBar.setNavigationOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
         questionAnswerRecyclerView.adapter = adapter
         questionAnswerDao = BookDatabase.getInstance(requireContext()).questionAnswerDao()
         prefixDao = BookDatabase.getInstance(requireContext()).prefixDao()

@@ -6,13 +6,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/unitAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/unitToolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/app_name_caps"
+            app:titleTextColor="@color/white"
+            app:menu="@menu/menu_actionbar_units"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/bismillah_arabic"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/unitAppBar"
         android:layout_marginTop="@dimen/margin_eight"
         android:text="@string/bismillah_arabic"
         android:textAlignment="center"
@@ -64,18 +79,30 @@
         
         <TextView
             android:id="@+id/lastReadTopicName"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@id/lastReadImage"
             app:layout_constraintTop_toTopOf="@id/divider1"
             app:layout_constraintBottom_toBottomOf="@id/divider2"
+            app:layout_constraintEnd_toStartOf="@id/historyIcon"
             android:layout_marginStart="@dimen/margin_standard"
             android:gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_standard"
             android:fontFamily="@font/times"
             android:textStyle="bold"
             android:text="ДИН ҲӘМ ШӘРИЯТ"
             android:textSize="20dp"
             tools:ignore="SpUsage" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/historyIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_outline_history_24"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:layout_constraintBottom_toTopOf="@id/divider2"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/margin_standard"/>
 
         <View
             android:id="@+id/divider2"

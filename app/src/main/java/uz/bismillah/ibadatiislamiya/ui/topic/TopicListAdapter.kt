@@ -16,9 +16,9 @@ class TopicListAdapter : RecyclerView.Adapter<TopicListAdapter.TopicListViewHold
             notifyDataSetChanged()
         }
 
-    private var onTopicItemClick : (topicId: Int) -> Unit = {}
+    private var onTopicItemClick : (topicId: Int, topicName: String) -> Unit = {_, _ -> }
 
-    fun setOnTopicItemClickListener(onTopicItemClick : (topicId: Int) -> Unit) {
+    fun setOnTopicItemClickListener(onTopicItemClick : (topicId: Int, topicName: String) -> Unit) {
         this.onTopicItemClick = onTopicItemClick
     }
 
@@ -38,7 +38,7 @@ class TopicListAdapter : RecyclerView.Adapter<TopicListAdapter.TopicListViewHold
             itemView.topicTitleTextView.text = topic.name
 
             itemView.setOnClickListener {
-                onTopicItemClick.invoke(topic.id)
+                onTopicItemClick.invoke(topic.id, topic.name)
             }
         }
     }

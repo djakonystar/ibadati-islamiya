@@ -19,9 +19,9 @@ class UnitListAdapter : RecyclerView.Adapter<UnitListAdapter.UnitListViewHolder>
             notifyDataSetChanged()
         }
 
-    private var onUnitItemClick : (id: Int) -> Unit = {}
+    private var onUnitItemClick : (id: Int, title: String) -> Unit = { _, _ -> }
 
-    fun setOnUnitItemClickListener(onUnitItemClick: (id: Int) -> Unit) {
+    fun setOnUnitItemClickListener(onUnitItemClick: (id: Int, title: String) -> Unit) {
         this.onUnitItemClick = onUnitItemClick
     }
 
@@ -51,7 +51,7 @@ class UnitListAdapter : RecyclerView.Adapter<UnitListAdapter.UnitListViewHolder>
 
 
             itemView.setOnClickListener {
-                onUnitItemClick.invoke(unit.id)
+                onUnitItemClick.invoke(unit.id, unit.name)
             }
         }
     }

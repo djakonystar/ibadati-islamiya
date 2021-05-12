@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.*
 import uz.bismillah.ibadatiislamiya.data.model.*
 
-@Database(entities = [Units::class, Topic::class, QuestionAnswer::class, Prefix::class], version = 1)
+@Database(entities = [Units::class, Topic::class, QuestionAnswer::class, Prefix::class], version = 2)
 abstract class BookDatabase : RoomDatabase() {
     companion object {
         private lateinit var INSTANCE: BookDatabase
