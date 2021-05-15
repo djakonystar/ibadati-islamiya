@@ -86,19 +86,31 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:gravity="end">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/favoriteIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_bookmark_border_24"
-                android:padding="16dp"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/addToBookmark"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:lottie_fileName="bookmark.json"
+                app:lottie_loop="false"
+                app:lottie_autoPlay="false"/>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/shareIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_outline_share_24"
-                android:padding="16dp"/>
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/copy"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:lottie_fileName="copy.json"
+                app:lottie_loop="false"
+                app:lottie_autoPlay="false"/>
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/share"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:lottie_fileName="share_linear.json"
+                android:layout_margin="4dp"
+                app:lottie_loop="false"
+                app:lottie_autoPlay="false"/>
+
 
         </LinearLayout>
 

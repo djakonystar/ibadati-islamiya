@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.item_prefix.view.*
 import kotlinx.android.synthetic.main.item_question_answer.view.*
 import kotlinx.android.synthetic.main.item_question_answer.view.answerTextView
@@ -53,6 +54,38 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             } else {
                 Html.fromHtml(questionAnswer.answer)
             }
+
+            var isFavorite = false
+
+            if (isFavorite) {
+                itemView.addToBookmark.progress = 0.44f
+            }
+            itemView.copy.progress = 0.67f
+            itemView.share.progress = 0.67f
+
+            itemView.addToBookmark.setOnClickListener {
+                if (!isFavorite) {
+                    itemView.addToBookmark.speed = 1f
+                    itemView.addToBookmark.playAnimation()
+                } else {
+                    itemView.addToBookmark.speed = -1.7f
+                    itemView.addToBookmark.setMinAndMaxFrame(0, 22)
+                    itemView.addToBookmark.playAnimation()
+                }
+                isFavorite = !isFavorite
+            }
+
+            itemView.copy.setOnClickListener {
+                itemView.copy.setMinAndMaxFrame(0, 80)
+                itemView.copy.speed = 2.6f
+                itemView.copy.playAnimation()
+            }
+
+            itemView.share.setOnClickListener {
+                itemView.share.setMinAndMaxFrame(0, 40)
+                itemView.share.speed = 1.5f
+                itemView.share.playAnimation()
+            }
         }
     }
 
@@ -62,6 +95,38 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                 Html.fromHtml(prefix.text, Html.FROM_HTML_MODE_COMPACT)
             } else {
                 Html.fromHtml(prefix.text)
+            }
+
+            var isFavorite = false
+
+            if (isFavorite) {
+                itemView.addToBookmark.progress = 0.44f
+            }
+            itemView.copy.progress = 0.67f
+            itemView.share.progress = 0.67f
+
+            itemView.addToBookmark.setOnClickListener {
+                if (!isFavorite) {
+                    itemView.addToBookmark.speed = 1f
+                    itemView.addToBookmark.playAnimation()
+                } else {
+                    itemView.addToBookmark.speed = -1.7f
+                    itemView.addToBookmark.setMinAndMaxFrame(0, 22)
+                    itemView.addToBookmark.playAnimation()
+                }
+                isFavorite = !isFavorite
+            }
+
+            itemView.copy.setOnClickListener {
+                itemView.copy.setMinAndMaxFrame(0, 80)
+                itemView.copy.speed = 2.6f
+                itemView.copy.playAnimation()
+            }
+
+            itemView.share.setOnClickListener {
+                itemView.share.setMinAndMaxFrame(0, 40)
+                itemView.share.speed = 1.5f
+                itemView.share.playAnimation()
             }
         }
     }

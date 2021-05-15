@@ -10,7 +10,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "uz.bismillah.ibadatiislamiya"
+        applicationId "uz.bismillahi.ibadatiislamiya"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1

@@ -3,8 +3,11 @@ package uz.bismillah.ibadatiislamiya.ui.unit
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.fragment_unit.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BookDatabase
@@ -29,6 +32,8 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
 
         unitsRecyclerView.adapter = adapter
         unitsRecyclerView.addItemDecoration(SpaceItemDecoration(8))
@@ -72,6 +77,17 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
                 fragmentManager?.replace(R.id.fragmentContainer, fragment)?.addToBackStack(null)?.commit()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        requireActivity().menuInflater.inflate(R.menu.menu_actionbar_units, menu)
+        val themeItem = menu.findItem(R.id.toggleTheme)
+        val themeView = themeItem.actionView as LottieAnimationView
+        themeView.setOnClickListener {
+            themeView.playAnimation()
+        }
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     private fun setData() {
