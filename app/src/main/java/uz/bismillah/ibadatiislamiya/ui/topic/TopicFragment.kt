@@ -3,12 +3,8 @@ package uz.bismillah.ibadatiislamiya.ui.topic
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.DrawableCompat
-import androidx.core.view.get
+import android.widget.Button
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -81,14 +77,24 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             }
         }
 
+        qrKeyPressed(keyA)
+        qrKeyPressed(keyG)
+        qrKeyPressed(keyH)
+        qrKeyPressed(keyQ)
+        qrKeyPressed(keyN)
+        qrKeyPressed(keyO)
+        qrKeyPressed(keyU)
+        qrKeyPressed(keyW)
 
-
-        keyA.setOnClickListener {
-            topicSearchEditText.setText("${topicSearchEditText.text}ә")
-        }
     }
 
     private fun setData(unitId: Int) {
         adapter.models = dao.getTopicsByUnit(unitId)
+    }
+
+    private fun qrKeyPressed(view: View) {
+        view.setOnClickListener {
+            topicSearchEditText.text?.insert(topicSearchEditText.selectionStart, ((it as Button).text))
+        }
     }
 }

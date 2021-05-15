@@ -100,33 +100,33 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             var isFavorite = false
 
             if (isFavorite) {
-                itemView.addToBookmark.progress = 0.44f
+                itemView.addToBookmarkPrefix.progress = 0.44f
             }
-            itemView.copy.progress = 0.67f
-            itemView.share.progress = 0.67f
+            itemView.copyPrefix.progress = 0.67f
+            itemView.sharePrefix.progress = 0.67f
 
-            itemView.addToBookmark.setOnClickListener {
+            itemView.addToBookmarkPrefix.setOnClickListener {
                 if (!isFavorite) {
-                    itemView.addToBookmark.speed = 1f
-                    itemView.addToBookmark.playAnimation()
+                    itemView.addToBookmarkPrefix.speed = 1f
+                    itemView.addToBookmarkPrefix.playAnimation()
                 } else {
-                    itemView.addToBookmark.speed = -1.7f
-                    itemView.addToBookmark.setMinAndMaxFrame(0, 22)
-                    itemView.addToBookmark.playAnimation()
+                    itemView.addToBookmarkPrefix.speed = -1.7f
+                    itemView.addToBookmarkPrefix.setMinAndMaxFrame(0, 22)
+                    itemView.addToBookmarkPrefix.playAnimation()
                 }
                 isFavorite = !isFavorite
             }
 
-            itemView.copy.setOnClickListener {
-                itemView.copy.setMinAndMaxFrame(0, 80)
-                itemView.copy.speed = 2.6f
-                itemView.copy.playAnimation()
+            itemView.copyPrefix.setOnClickListener {
+                itemView.copyPrefix.setMinAndMaxFrame(0, 80)
+                itemView.copyPrefix.speed = 2.6f
+                itemView.copyPrefix.playAnimation()
             }
 
-            itemView.share.setOnClickListener {
-                itemView.share.setMinAndMaxFrame(0, 40)
-                itemView.share.speed = 1.5f
-                itemView.share.playAnimation()
+            itemView.sharePrefix.setOnClickListener {
+                itemView.sharePrefix.setMinAndMaxFrame(0, 40)
+                itemView.sharePrefix.speed = 1.5f
+                itemView.sharePrefix.playAnimation()
             }
         }
     }

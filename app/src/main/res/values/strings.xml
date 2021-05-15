@@ -15,4 +15,16 @@
     <string name="answer_title">Жуўап:</string>
     <string name="change_theme">Теманы өзгертиў</string>
     <string name="change_text_size">Текст өлшемин өзгертиў</string>
+    <string name="charA">Ә</string>
+    <string name="charG">Ғ</string>
+    <string name="charH">Ҳ</string>
+    <string name="charQ">Қ</string>
+    <string name="charN">Ң</string>
+    <string name="charO">Ө</string>
+    <string name="charU">Ү</string>
+    <string name="charW">Ў</string>
+    <string name="extra_large">Жүдә үлкен</string>
+    <string name="large">Үлкен</string>
+    <string name="normal">Орташа</string>
+    <string name="small">Киши</string>
 </resources>
