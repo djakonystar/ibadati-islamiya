@@ -7,9 +7,14 @@ import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import uz.bismillah.ibadatiislamiya.R
+import uz.bismillah.ibadatiislamiya.ui.bookmarks.BookmarksFragment
 import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        const val TEXT_SIZE = "textSize"
+    }
+
     lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
+        preferences.getFloat(TEXT_SIZE, resources.getDimension(R.dimen.text_normal))
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
@@ -25,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bookmarksMenuItem -> {
-                    Toast.makeText(this, "Bookmarks Selected", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, BookmarksFragment()).addToBackStack(null).commit()
                     true
                 }
                 R.id.searchMenuItem -> {

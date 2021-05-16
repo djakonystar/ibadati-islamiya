@@ -2,6 +2,7 @@ package uz.bismillah.ibadatiislamiya.data.dao
 
 import androidx.room.Dao
 import androidx.room.Query
+import androidx.room.Update
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
 
 @Dao
@@ -10,8 +11,17 @@ interface QuestionAnswerDao {
     fun getAllQuestions() : List<QuestionAnswer>
 
     @Query("SELECT * FROM question_answer WHERE topic_id IN (:topicIds)")
-    fun getAllByTopics(topicIds: IntArray) : List<QuestionAnswer>
+    fun getAllQuestionsByTopics(topicIds: IntArray) : List<QuestionAnswer>
+
+    @Query("SELECT * FROM question_answer WHERE id = :id")
+    fun getQuestionById(id: Int) : QuestionAnswer
 
     @Query("SELECT * FROM question_answer WHERE topic_id = (:topicId)")
-    fun getByTopic(topicId: Int) : List<QuestionAnswer>
+    fun getQuestionsByTopic(topicId: Int) : List<QuestionAnswer>
+
+    @Query("SELECT * FROM question_answer WHERE is_favorite = 1")
+    fun getAllFavoriteQuestions() : List<QuestionAnswer>
+
+    @Update
+    fun updateQuestion(questionAnswer: QuestionAnswer)
 }

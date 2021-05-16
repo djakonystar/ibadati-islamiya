@@ -20,5 +20,5 @@ data class Prefix(
     val unitId: Int,
 
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Int
+    var isFavorite: Int
 ) : BaseModelQAPrefix(BaseModelQAPrefix.PREFIX)
