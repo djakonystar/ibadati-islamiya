@@ -6,28 +6,27 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/topicAppBar"
+        android:id="@+id/searchAppBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topicActionBar"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/searchActionBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/app_name_caps"
+            app:title="ИЗЛЕЎ"
             app:titleTextColor="@color/white"
             app:menu="@menu/menu_actionbar_topics"/>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/topicSearchBar"
+        android:id="@+id/searchBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topicAppBar"
+        app:layout_constraintTop_toBottomOf="@id/searchAppBar"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:hintTextColor="@color/app_color"
         app:endIconMode="clear_text"
@@ -39,7 +38,7 @@
         android:layout_margin="@dimen/margin_eight">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/topicSearchEditText"
+            android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/search_by_topic"
@@ -50,18 +49,18 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
-        android:id="@+id/cyrillicKeyPad"
+        android:id="@+id/cyrillicKeyPadInSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/topicSearchBar"
-        app:layout_constraintBottom_toTopOf="@id/topicsRecyclerView"
+        app:layout_constraintTop_toBottomOf="@id/searchBar"
+        app:layout_constraintBottom_toTopOf="@id/searchRecyclerView"
         android:layout_marginTop="@dimen/margin_eight"
         android:visibility="gone"
         android:orientation="horizontal"
         android:gravity="center">
 
         <Button
-            android:id="@+id/keyA"
+            android:id="@+id/keyAInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -74,7 +73,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyG"
+            android:id="@+id/keyGInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -87,7 +86,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyH"
+            android:id="@+id/keyHInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -100,7 +99,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyQ"
+            android:id="@+id/keyQInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -113,7 +112,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyN"
+            android:id="@+id/keyNInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -126,7 +125,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyO"
+            android:id="@+id/keyOInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -139,7 +138,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyU"
+            android:id="@+id/keyUInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -152,7 +151,7 @@
             android:backgroundTint="@color/transparent"/>
 
         <Button
-            android:id="@+id/keyW"
+            android:id="@+id/keyWInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
             android:layout_height="wrap_content"
@@ -162,16 +161,13 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/topicsRecyclerView"
-        android:layout_width="0dp"
+        android:id="@+id/searchRecyclerView"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cyrillicKeyPadInSearch"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cyrillicKeyPad"
-        android:layout_marginTop="@dimen/margin_eight"
+        tools:listitem="@layout/item_search"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:orientation="vertical"
-        tools:listitem="@layout/item_topic"/>
+        android:orientation="vertical"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

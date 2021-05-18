@@ -33,9 +33,9 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        questionAnswerToolBar.title = arguments?.getString(TopicFragment.TOPIC_NAME)
-        questionAnswerToolBar.setNavigationIcon(R.drawable.ic_back_24)
-        questionAnswerToolBar.setNavigationOnClickListener {
+        questionAnswerActionBar.title = arguments?.getString(TopicFragment.TOPIC_NAME)
+        questionAnswerActionBar.setNavigationIcon(R.drawable.ic_back_24)
+        questionAnswerActionBar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
 
@@ -45,7 +45,7 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
         topicDao = BookDatabase.getInstance(requireContext()).topicDao()
         setData(arguments?.getInt(TopicFragment.TOPIC_ID) ?: 1)
 
-        questionAnswerToolBar.setOnMenuItemClickListener {
+        questionAnswerActionBar.setOnMenuItemClickListener {
             if (it.itemId == R.id.textSizeSettings) {
                 val inflater = requireContext().getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
                 val popupView = inflater.inflate(R.layout.popup_textsize, null)

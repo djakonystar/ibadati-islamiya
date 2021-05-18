@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="my_color">#FF0000</item>
+        <item name="android:fontFamily">@font/times</item>
+        <item name="iconTintColor">@color/black</item>
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
