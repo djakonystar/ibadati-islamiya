@@ -21,14 +21,34 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             notifyDataSetChanged()
         }
 
-    private var onQuestionFavIconClick: (questionAnswer: QuestionAnswer) -> Unit = {}
-    fun setOnQuestionFavIconClickListener(onQuestionFavIconClick: (questionAnswer : QuestionAnswer) -> Unit) {
+    private var onQuestionFavIconClick: (questionAnswer: QuestionAnswer, position: Int) -> Unit = {questionAnswer, position ->  }
+    fun setOnQuestionFavIconClickListener(onQuestionFavIconClick: (questionAnswer : QuestionAnswer, position: Int) -> Unit) {
         this.onQuestionFavIconClick = onQuestionFavIconClick
     }
 
-    private var onPrefixFavIconClick: (prefix: Prefix) -> Unit = {}
-    fun setOnPrefixFavIconClickListener(onPrefixFavIconClick: (prefix: Prefix) -> Unit) {
+    private var onQuestionCopyIconClick: (question: String, answer: String) -> Unit = { question, answer -> }
+    fun setOnQuestionCopyIconClickListener(onQuestionCopyIconClick: (question: String, answer: String) -> Unit) {
+        this.onQuestionCopyIconClick = onQuestionCopyIconClick
+    }
+
+    private var onQuestionShareIconClick: (question: String, answer: String) -> Unit = { question, answer -> }
+    fun setOnQuestionShareIconClickListener(onQuestionShareIconClick: (question: String, answer: String) -> Unit) {
+        this.onQuestionShareIconClick = onQuestionShareIconClick
+    }
+
+    private var onPrefixFavIconClick: (prefix: Prefix, position: Int) -> Unit = { prefix, position ->  }
+    fun setOnPrefixFavIconClickListener(onPrefixFavIconClick: (prefix: Prefix, position: Int) -> Unit) {
         this.onPrefixFavIconClick = onPrefixFavIconClick
+    }
+
+    private var onPrefixCopyIconClick: (prefixText: String) -> Unit = { prefixText -> }
+    fun setOnPrefixCopyIconClickListener(onPrefixCopyIconClick: (prefixText: String) -> Unit) {
+        this.onPrefixCopyIconClick = onPrefixCopyIconClick
+    }
+
+    private var onPrefixShareIconClick: (prefixText: String) -> Unit = { prefixText -> }
+    fun setOnPrefixShareIconClickListener(onPrefixShareIconClick: (prefixText: String) -> Unit) {
+        this.onPrefixShareIconClick = onPrefixShareIconClick
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,9 +63,9 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (models[position].type == BaseModelQAPrefix.PREFIX) {
-            (holder as BookmarksListAdapter.BookmarksPrefixListViewHolder).populateModel(models[position] as Prefix)
+            (holder as BookmarksListAdapter.BookmarksPrefixListViewHolder).populateModel(models[position] as Prefix, position)
         } else {
-            (holder as BookmarksListAdapter.BookmarksQuestionAnswerListViewHolder).populateModel(models[position] as QuestionAnswer)
+            (holder as BookmarksListAdapter.BookmarksQuestionAnswerListViewHolder).populateModel(models[position] as QuestionAnswer, position)
         }
     }
 
@@ -53,8 +73,14 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = models.size
 
+    fun removeItem(position: Int) {
+        models.toMutableList().removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(0, models.size)
+    }
+
     inner class BookmarksQuestionAnswerListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun populateModel(questionAnswer: QuestionAnswer) {
+        fun populateModel(questionAnswer: QuestionAnswer, position: Int) {
             itemView.questionTextView.text = questionAnswer.question
             itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(questionAnswer.answer, Html.FROM_HTML_MODE_COMPACT)
@@ -80,7 +106,7 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     itemView.addToBookmark.playAnimation()
                 }
                 isFavorite = !isFavorite
-                onQuestionFavIconClick.invoke(questionAnswer)
+                onQuestionFavIconClick.invoke(questionAnswer, position)
             }
 
             itemView.copy.setOnClickListener {
@@ -98,7 +124,7 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     inner class BookmarksPrefixListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun populateModel(prefix: Prefix) {
+        fun populateModel(prefix: Prefix, position: Int) {
             itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Html.fromHtml(prefix.text, Html.FROM_HTML_MODE_COMPACT)
             } else {
@@ -123,7 +149,7 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     itemView.addToBookmarkPrefix.playAnimation()
                 }
                 isFavorite = !isFavorite
-                onPrefixFavIconClick.invoke(prefix)
+                onPrefixFavIconClick.invoke(prefix, position)
             }
 
             itemView.copyPrefix.setOnClickListener {

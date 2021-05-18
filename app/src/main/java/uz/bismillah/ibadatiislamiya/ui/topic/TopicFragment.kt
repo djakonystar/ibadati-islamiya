@@ -32,9 +32,9 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
 
         preferences = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
 
-        topicToolBar.title = arguments?.getString(UnitFragment.UNIT_NAME)
-        topicToolBar.setNavigationIcon(R.drawable.ic_back_24)
-        topicToolBar.setNavigationOnClickListener {
+        topicActionBar.title = arguments?.getString(UnitFragment.UNIT_NAME)
+        topicActionBar.setNavigationIcon(R.drawable.ic_back_24)
+        topicActionBar.setNavigationOnClickListener {
             requireActivity().onBackPressed()
         }
 
@@ -62,14 +62,14 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             topicSearchEditText.text?.clear()
         }
 
-        topicToolBar.setOnMenuItemClickListener {
+        topicActionBar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.keys -> {
                     keysShown = !keysShown
                     if (keysShown) {
-                        cyrillic_keys.visibility = View.VISIBLE
+                        cyrillicKeyPad.visibility = View.VISIBLE
                     } else {
-                        cyrillic_keys.visibility = View.GONE
+                        cyrillicKeyPad.visibility = View.GONE
                     }
                     true
                 }

@@ -5,9 +5,11 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.synthetic.main.activity_main.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.ui.bookmarks.BookmarksFragment
+import uz.bismillah.ibadatiislamiya.ui.search.SearchFragment
 import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 
 class MainActivity : AppCompatActivity() {
@@ -24,10 +26,12 @@ class MainActivity : AppCompatActivity() {
         preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
         preferences.getFloat(TEXT_SIZE, resources.getDimension(R.dimen.text_normal))
 
+        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).addToBackStack(UnitFragment::class.simpleName).commit()
+
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.homeMenuItem -> {
-//                    supportFragmentManager.beginTransaction().replace(R.id.fragmentLayout, HomePageFragment())
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).addToBackStack(UnitFragment::class.simpleName).commit()
                     true
                 }
                 R.id.bookmarksMenuItem -> {
@@ -35,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.searchMenuItem -> {
-                    Toast.makeText(this, "Search Selected", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, SearchFragment()).addToBackStack(SearchFragment::class.simpleName).commit()
                     true
                 }
                 R.id.aboutMenuItem -> {
@@ -47,5 +51,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).commit()
+    }
+
+    override fun onBackPressed() {
+        if (supportFragmentManager.backStackEntryCount == 1) {
+            this.finish()
+        } else {
+            supportFragmentManager.popBackStackImmediate(
+                    supportFragmentManager.getBackStackEntryAt(
+                            supportFragmentManager.backStackEntryCount - 1
+                    ).id, FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
+            bottomNav.menu.getItem(0).isChecked = true
+        }
     }
 }

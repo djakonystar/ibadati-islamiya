@@ -48,14 +48,14 @@ class BookmarksFragment : Fragment(R.layout.fragment_bookmarks) {
             }
         }
 
-        adapter.setOnQuestionFavIconClickListener {
-            setFavoriteQuestion(it)
-            setData()
+        adapter.setOnQuestionFavIconClickListener { questionAnswer, position ->
+            setFavoriteQuestion(questionAnswer)
+            adapter.removeItem(position)
         }
 
-        adapter.setOnPrefixFavIconClickListener {
-            setFavoritePrefix(it)
-            setData()
+        adapter.setOnPrefixFavIconClickListener { prefix, position ->
+            setFavoritePrefix(prefix)
+            adapter.removeItem(position)
         }
     }
 

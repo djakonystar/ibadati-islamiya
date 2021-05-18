@@ -6,10 +6,4 @@
         android:icon="@drawable/ic_keyboard_24"
         android:title="Кирилл клавишалары"
         app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/toggleTheme"
-        android:icon="@drawable/ic_theme_night_24"
-        android:title="@string/change_theme"
-        app:showAsAction="ifRoom"/>
 </menu>
