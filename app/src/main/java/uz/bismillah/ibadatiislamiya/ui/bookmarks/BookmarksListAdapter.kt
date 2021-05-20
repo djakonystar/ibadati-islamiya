@@ -15,7 +15,7 @@ import uz.bismillah.ibadatiislamiya.data.model.Prefix
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
 
 class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var models = listOf<BaseModelQAPrefix>()
+    var models = mutableListOf<BaseModelQAPrefix>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -74,7 +74,7 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun getItemCount(): Int = models.size
 
     fun removeItem(position: Int) {
-        models.toMutableList().removeAt(position)
+        models.removeAt(position)
         notifyItemRemoved(position)
         notifyItemRangeChanged(0, models.size)
     }
@@ -92,6 +92,8 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             if (isFavorite) {
                 itemView.addToBookmark.progress = 0.44f
+            } else {
+                itemView.addToBookmark.progress = 0f
             }
             itemView.copy.progress = 0.67f
             itemView.share.progress = 0.67f

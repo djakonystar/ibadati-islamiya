@@ -4,20 +4,20 @@
         android:id="@+id/homeMenuItem"
         android:enabled="true"
         android:icon="@drawable/ic_outline_home_24"
-        android:title="Бас бет"/>
+        android:title="@string/home"/>
     <item
         android:id="@+id/bookmarksMenuItem"
         android:enabled="true"
         android:icon="@drawable/ic_outline_bookmarks_24"
-        android:title="Сайландылар"/>
+        android:title="@string/bookmarks"/>
     <item
         android:id="@+id/searchMenuItem"
         android:enabled="true"
         android:icon="@drawable/ic_outline_search_24"
-        android:title="Излеу"/>
+        android:title="@string/search"/>
     <item
-        android:id="@+id/aboutMenuItem"
+        android:id="@+id/infoMenuItem"
         android:enabled="true"
         android:icon="@drawable/ic_outline_info_24"
-        android:title="Автор хаккында"/>
+        android:title="@string/info"/>
 </menu>

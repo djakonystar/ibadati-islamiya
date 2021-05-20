@@ -5,6 +5,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.item_prefix.view.*
@@ -79,16 +80,13 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
     inner class QuestionAnswerListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(questionAnswer: QuestionAnswer) {
             itemView.questionTextView.text = questionAnswer.question
-            itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(questionAnswer.answer, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(questionAnswer.answer)
-            }
-
+            itemView.answerTextView.text = HtmlCompat.fromHtml(questionAnswer.answer, HtmlCompat.FROM_HTML_MODE_COMPACT)
             var isFavorite = questionAnswer.isFavorite == 1
 
             if (isFavorite) {
                 itemView.addToBookmark.progress = 0.44f
+            } else {
+                itemView.addToBookmark.progress = 0f
             }
             itemView.copy.progress = 0.67f
             itemView.share.progress = 0.67f
@@ -124,16 +122,14 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     inner class PrefixViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(prefix: Prefix) {
-            itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(prefix.text, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(prefix.text)
-            }
+            itemView.answerTextView.text = HtmlCompat.fromHtml(prefix.text, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
             var isFavorite = prefix.isFavorite == 1
 
             if (isFavorite) {
                 itemView.addToBookmarkPrefix.progress = 0.44f
+            } else {
+                itemView.addToBookmarkPrefix.progress = 0f
             }
             itemView.copyPrefix.progress = 0.67f
             itemView.sharePrefix.progress = 0.67f

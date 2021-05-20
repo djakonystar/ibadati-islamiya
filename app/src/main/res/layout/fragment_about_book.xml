@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/aboutBookAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/aboutBookActionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/about_title"
+            app:titleTextColor="@color/white"
+            app:navigationIcon="@drawable/ic_back_24"
+            app:menu="@menu/menu_actionbar_with_settings"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/aboutBookTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/aboutBookAppBar"
+        android:layout_margin="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/about_title"
+        android:textSize="@dimen/text_normal"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/aboutBookText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/aboutBookTitle"
+        android:layout_margin="@dimen/margin_standard"
+        android:text="@string/about_book"
+        android:gravity="center"
+        android:textSize="@dimen/text_normal"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/aboutBookDivider"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/aboutBookText"
+        android:src="@drawable/gold_divider"
+        android:tint="@color/app_color"/>
+
+    <TextView
+        android:id="@+id/aboutBookTitles"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/aboutBookDivider"
+        android:layout_margin="@dimen/margin_standard"
+        android:gravity="center"
+        android:text="@string/book_title"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

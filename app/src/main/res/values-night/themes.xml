@@ -15,5 +15,7 @@
         <item name="android:fontFamily">@font/times</item>
         <item name="iconTintColor">@color/white</item>
         <item name="android:textColor">@color/white</item>
+        <item name="android:navigationBarColor">@color/app_color</item>
+        <item name="fragmentBackgroundColor">@color/app_color_variant_dark</item>
     </style>
 </resources>

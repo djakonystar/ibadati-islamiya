@@ -35,22 +35,20 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.bookmarksMenuItem -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, BookmarksFragment()).addToBackStack(null).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, BookmarksFragment()).addToBackStack(BookmarksFragment::class.java.simpleName).commit()
                     true
                 }
                 R.id.searchMenuItem -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, SearchFragment()).addToBackStack(SearchFragment::class.simpleName).commit()
                     true
                 }
-                R.id.aboutMenuItem -> {
+                R.id.infoMenuItem -> {
                     Toast.makeText(this, "About Me Selected", Toast.LENGTH_SHORT).show()
                     true
                 }
                 else -> false
             }
         }
-
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).commit()
     }
 
     override fun onBackPressed() {
