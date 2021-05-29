@@ -54,7 +54,7 @@ class SearchResultListAdapter : RecyclerView.Adapter<SearchResultListAdapter.Sea
 
     inner class SearchResultListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(questionAnswer: QuestionAnswer) {
-            itemView.questionTextView.text = questionAnswer.question
+            itemView.questionTextView.text = HtmlCompat.fromHtml(questionAnswer.question, HtmlCompat.FROM_HTML_MODE_COMPACT)
             itemView.answerTextView.text = HtmlCompat.fromHtml(questionAnswer.answer, HtmlCompat.FROM_HTML_MODE_COMPACT)
 
             itemView.questionTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)

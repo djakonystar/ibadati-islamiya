@@ -17,7 +17,6 @@ import uz.bismillah.ibadatiislamiya.data.dao.QuestionAnswerDao
 import uz.bismillah.ibadatiislamiya.data.dao.TopicDao
 import uz.bismillah.ibadatiislamiya.data.model.Prefix
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
-import uz.bismillah.ibadatiislamiya.dpToFloat
 import uz.bismillah.ibadatiislamiya.ui.MainActivity
 import uz.bismillah.ibadatiislamiya.ui.MainActivity.Companion.TEXT_SIZE
 
