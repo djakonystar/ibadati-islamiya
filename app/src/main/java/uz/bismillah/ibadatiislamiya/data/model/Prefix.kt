@@ -3,6 +3,7 @@ package uz.bismillah.ibadatiislamiya.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import uz.bismillah.ibadatiislamiya.data.BaseModelQAPrefix
 
 @Entity(tableName = "prefixes")
 data class Prefix(
@@ -19,5 +20,5 @@ data class Prefix(
     val unitId: Int,
 
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Int
-)
+    var isFavorite: Int
+) : BaseModelQAPrefix(BaseModelQAPrefix.PREFIX)

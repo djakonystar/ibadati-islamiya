@@ -13,5 +13,8 @@ data class Topic(
     val name: String,
 
     @ColumnInfo(name = "unit_id")
-    val unitId: Int
+    val unitId: Int,
+
+    @ColumnInfo(name = "has_prefix")
+    val hasPrefix: Int
 )
