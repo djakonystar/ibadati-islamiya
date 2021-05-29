@@ -16,14 +16,16 @@
         app:menu="@menu/menu_bottom_nav"
         app:labelVisibilityMode="selected"/>
 
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragmentContainer"
+    <fragment
+        android:id="@+id/fragmentNavHost"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"/>
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

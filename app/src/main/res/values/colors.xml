@@ -8,8 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="app_color">#7777FF</color>
-    <color name="app_color_variant">#6060FF</color>
+    <color name="app_color_variant">#3c4bcb</color>
     <color name="app_color_variant_dark">#0E0E0E</color>
+    <color name="dark">#90595959</color>
     <color name="transparent">#00000000</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/app_color</color>
 </resources>

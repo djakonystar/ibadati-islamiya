@@ -4,63 +4,60 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
 import uz.bismillah.ibadatiislamiya.R
-import uz.bismillah.ibadatiislamiya.ui.bookmarks.BookmarksFragment
-import uz.bismillah.ibadatiislamiya.ui.search.SearchFragment
-import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
+import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment.Companion.CURRENT_THEME
 
 class MainActivity : AppCompatActivity() {
     companion object {
         const val TEXT_SIZE = "textSize"
     }
 
-    lateinit var preferences: SharedPreferences
+    private lateinit var preferences: SharedPreferences
+    private lateinit var navController: NavController
+    private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         preferences = getSharedPreferences("Settings", Context.MODE_PRIVATE)
-        preferences.getFloat(TEXT_SIZE, resources.getDimension(R.dimen.text_normal))
+//        TODO: AppCompatDelegate.setDefaultNightMode(preferences.getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_NO))
 
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).addToBackStack(UnitFragment::class.simpleName).commit()
+        setupViews()
 
-        bottomNav.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.homeMenuItem -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, UnitFragment()).addToBackStack(UnitFragment::class.simpleName).commit()
-                    true
-                }
-                R.id.bookmarksMenuItem -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, BookmarksFragment()).addToBackStack(BookmarksFragment::class.java.simpleName).commit()
-                    true
-                }
-                R.id.searchMenuItem -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, SearchFragment()).addToBackStack(SearchFragment::class.simpleName).commit()
-                    true
-                }
-                R.id.infoMenuItem -> {
-                    Toast.makeText(this, "About Me Selected", Toast.LENGTH_SHORT).show()
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) {
-            this.finish()
-        } else {
-            supportFragmentManager.popBackStackImmediate(
-                    supportFragmentManager.getBackStackEntryAt(
-                            supportFragmentManager.backStackEntryCount - 1
-                    ).id, FragmentManager.POP_BACK_STACK_INCLUSIVE
+    private fun setupViews() {
+        var navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentNavHost) as NavHostFragment
+        navController = navHostFragment.navController
+        bottomNav.setupWithNavController(navController)
+
+        appBarConfiguration = AppBarConfiguration(
+            topLevelDestinationIds = setOf (
+                R.id.unitFragment,
+                R.id.bookmarksFragment,
+                R.id.searchFragment,
+                R.id.infoFragment
             )
-            bottomNav.menu.getItem(0).isChecked = true
-        }
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragmentNavHost)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun setActionBarTitle(title: String) {
+        supportActionBar?.title = title
     }
 }

@@ -1,13 +1,11 @@
 package uz.bismillah.ibadatiislamiya.ui.questionanswer
 
-import android.os.Build
-import android.text.Html
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.airbnb.lottie.LottieAnimationView
 import kotlinx.android.synthetic.main.item_prefix.view.*
 import kotlinx.android.synthetic.main.item_question_answer.view.*
 import kotlinx.android.synthetic.main.item_question_answer.view.answerTextView
@@ -15,13 +13,21 @@ import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BaseModelQAPrefix
 import uz.bismillah.ibadatiislamiya.data.model.Prefix
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
+import uz.bismillah.ibadatiislamiya.dpToFloat
 
 class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var textSize = 18f
+
     var models = listOf<BaseModelQAPrefix>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    fun setTextSize(size: Float) {
+        textSize = size
+        notifyItemRangeChanged(0, models.size)
+    }
 
     private var onQuestionFavIconClick: (questionAnswer: QuestionAnswer) -> Unit = {}
     fun setOnQuestionFavIconClickListener(onQuestionFavIconClick: (questionAnswer : QuestionAnswer) -> Unit) {
@@ -81,6 +87,12 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
         fun populateModel(questionAnswer: QuestionAnswer) {
             itemView.questionTextView.text = questionAnswer.question
             itemView.answerTextView.text = HtmlCompat.fromHtml(questionAnswer.answer, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+            itemView.questionTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.questionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+
             var isFavorite = questionAnswer.isFavorite == 1
 
             if (isFavorite) {
@@ -122,7 +134,9 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
 
     inner class PrefixViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(prefix: Prefix) {
-            itemView.answerTextView.text = HtmlCompat.fromHtml(prefix.text, HtmlCompat.FROM_HTML_MODE_COMPACT)
+            itemView.prefixTextView.text = HtmlCompat.fromHtml(prefix.text, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+            itemView.prefixTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
             var isFavorite = prefix.isFavorite == 1
 

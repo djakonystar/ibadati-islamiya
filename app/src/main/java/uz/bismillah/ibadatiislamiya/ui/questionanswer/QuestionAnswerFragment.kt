@@ -1,18 +1,13 @@
 package uz.bismillah.ibadatiislamiya.ui.questionanswer
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Context.LAYOUT_INFLATER_SERVICE
-import android.content.Intent
+import android.content.*
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.PopupWindow
+import android.view.*
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import kotlinx.android.synthetic.main.fragment_question_answer.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BaseModelQAPrefix
@@ -22,45 +17,42 @@ import uz.bismillah.ibadatiislamiya.data.dao.QuestionAnswerDao
 import uz.bismillah.ibadatiislamiya.data.dao.TopicDao
 import uz.bismillah.ibadatiislamiya.data.model.Prefix
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
-import uz.bismillah.ibadatiislamiya.ui.topic.TopicFragment
+import uz.bismillah.ibadatiislamiya.dpToFloat
+import uz.bismillah.ibadatiislamiya.ui.MainActivity
+import uz.bismillah.ibadatiislamiya.ui.MainActivity.Companion.TEXT_SIZE
 
 class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
     private val adapter = QuestionAnswerListAdapter()
+    private lateinit var preferences: SharedPreferences
     private lateinit var questionAnswerDao: QuestionAnswerDao
     private lateinit var prefixDao: PrefixDao
     private lateinit var topicDao: TopicDao
+    private var topicId = 1
+    private lateinit var topicName: String
+    private val args: QuestionAnswerFragmentArgs by navArgs()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+
+        questionAnswerDao = BookDatabase.getInstance(requireContext()).questionAnswerDao()
+        prefixDao = BookDatabase.getInstance(requireContext()).prefixDao()
+        topicDao = BookDatabase.getInstance(requireContext()).topicDao()
+
+        topicId = args.topicId
+        topicName = args.topicName
+
+        preferences = requireActivity().getSharedPreferences("Settings", MODE_PRIVATE)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        questionAnswerActionBar.title = arguments?.getString(TopicFragment.TOPIC_NAME)
-        questionAnswerActionBar.setNavigationIcon(R.drawable.ic_back_24)
-        questionAnswerActionBar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
+        (activity as MainActivity).setActionBarTitle(topicName)
 
         questionAnswerRecyclerView.adapter = adapter
-        questionAnswerDao = BookDatabase.getInstance(requireContext()).questionAnswerDao()
-        prefixDao = BookDatabase.getInstance(requireContext()).prefixDao()
-        topicDao = BookDatabase.getInstance(requireContext()).topicDao()
-        setData(arguments?.getInt(TopicFragment.TOPIC_ID) ?: 1)
-
-        questionAnswerActionBar.setOnMenuItemClickListener {
-            if (it.itemId == R.id.textSizeSettings) {
-                val inflater = requireContext().getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
-                val popupView = inflater.inflate(R.layout.popup_textsize, null)
-
-                val width = LinearLayout.LayoutParams.WRAP_CONTENT
-                val height = LinearLayout.LayoutParams.WRAP_CONTENT
-                val focusable = true
-                val popupWindow = PopupWindow(popupView, width, height, focusable)
-                popupWindow.showAsDropDown(questionAnswerAppBar,0, 10, Gravity.END)
-
-                true
-            } else {
-                false
-            }
-        }
+        setData(topicId)
+        adapter.setTextSize(preferences.getFloat(TEXT_SIZE, 18f))
 
         adapter.setOnQuestionFavIconClickListener {
             setFavoriteQuestion(it)
@@ -93,7 +85,7 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
                         "\"Ибадати Исламия\" китабынан")
                 this.type = "text/plain"
             }
-            startActivity(shareIntent)
+            startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.app_name)))
         }
 
         adapter.setOnPrefixFavIconClickListener {
@@ -125,7 +117,54 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
                         "\"Ибадати Исламия\" китабынан")
                 this.type = "text/plain"
             }
-            startActivity(shareIntent)
+            startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.app_name)))
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_actionbar_with_textsize_changer, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.textSizeSettings -> {
+                val view = requireActivity().findViewById<View>(R.id.textSizeSettings)
+                val popupMenu = PopupMenu(requireContext(), view)
+                popupMenu.menuInflater.inflate(R.menu.menu_textsize_change, popupMenu.menu)
+
+                popupMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.smallTextSetting -> {
+                            preferences.edit().putFloat(TEXT_SIZE, 14f).apply()
+                            adapter.setTextSize(14f)
+                            Toast.makeText(requireContext(), "Small Clicked", Toast.LENGTH_SHORT).show()
+                            true
+                        }
+                        R.id.normalTextSetting -> {
+                            preferences.edit().putFloat(TEXT_SIZE, 18f).apply()
+                            adapter.setTextSize(18f)
+                            Toast.makeText(requireContext(), "Normal Clicked", Toast.LENGTH_SHORT).show()
+                            true
+                        }
+                        R.id.largeTextSetting -> {
+                            preferences.edit().putFloat(TEXT_SIZE, 22f).apply()
+                            adapter.setTextSize(22f)
+                            Toast.makeText(requireContext(), "Large Clicked", Toast.LENGTH_SHORT).show()
+                            true
+                        }
+                        R.id.extraLargeTextSetting -> {
+                            preferences.edit().putFloat(TEXT_SIZE, 26f).apply()
+                            adapter.setTextSize(26f)
+                            Toast.makeText(requireContext(), "Extra Large Clicked", Toast.LENGTH_SHORT).show()
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popupMenu.show()
+                true
+            }
+            else -> false
         }
     }
 
