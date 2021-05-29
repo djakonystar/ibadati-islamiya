@@ -96,9 +96,9 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             R.id.keys -> {
                 keysShown = !keysShown
                 if (keysShown) {
-                    cyrillicKeyPad.visibility = View.VISIBLE
+                    topicKeyPadScrollView.visibility = View.VISIBLE
                 } else {
-                    cyrillicKeyPad.visibility = View.GONE
+                    topicKeyPadScrollView.visibility = View.GONE
                 }
                 true
             }

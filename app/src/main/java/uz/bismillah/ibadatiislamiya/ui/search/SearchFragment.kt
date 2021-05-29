@@ -68,9 +68,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             R.id.keys -> {
                 keysShown = !keysShown
                 if (keysShown) {
-                    cyrillicKeyPadInSearch.visibility = View.VISIBLE
+                    searchKeyPadScrollView.visibility = View.VISIBLE
                 } else {
-                    cyrillicKeyPadInSearch.visibility = View.GONE
+                    searchKeyPadScrollView.visibility = View.GONE
                 }
                 true
             }

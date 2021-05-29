@@ -32,7 +32,9 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchListViewH
 
     inner class SearchListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(question: String) {
-            itemView.searchQuestionTextView.text = question
+            val questionRemovedStartTag = question.replace("<p>", " ")
+            val questionFinal = questionRemovedStartTag.replace("</p>", "")
+            itemView.searchQuestionTextView.text = questionFinal
 
             itemView.setOnClickListener {
                 onSearchingResultClick.invoke(question)
