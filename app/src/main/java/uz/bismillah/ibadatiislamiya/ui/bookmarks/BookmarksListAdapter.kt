@@ -2,9 +2,11 @@ package uz.bismillah.ibadatiislamiya.ui.bookmarks
 
 import android.os.Build
 import android.text.Html
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_prefix.view.*
 import kotlinx.android.synthetic.main.item_question_answer.view.*
@@ -15,11 +17,18 @@ import uz.bismillah.ibadatiislamiya.data.model.Prefix
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
 
 class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private var textSize = 18f
+
     var models = mutableListOf<BaseModelQAPrefix>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    fun setTextSize(size: Float) {
+        textSize = size
+        notifyItemRangeChanged(0, models.size)
+    }
 
     private var onQuestionFavIconClick: (questionAnswer: QuestionAnswer, position: Int) -> Unit = {questionAnswer, position ->  }
     fun setOnQuestionFavIconClickListener(onQuestionFavIconClick: (questionAnswer : QuestionAnswer, position: Int) -> Unit) {
@@ -63,9 +72,9 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (models[position].type == BaseModelQAPrefix.PREFIX) {
-            (holder as BookmarksListAdapter.BookmarksPrefixListViewHolder).populateModel(models[position] as Prefix, position)
+            (holder as BookmarksPrefixListViewHolder).populateModel(models[position] as Prefix, position)
         } else {
-            (holder as BookmarksListAdapter.BookmarksQuestionAnswerListViewHolder).populateModel(models[position] as QuestionAnswer, position)
+            (holder as BookmarksQuestionAnswerListViewHolder).populateModel(models[position] as QuestionAnswer, position)
         }
     }
 
@@ -82,11 +91,12 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     inner class BookmarksQuestionAnswerListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(questionAnswer: QuestionAnswer, position: Int) {
             itemView.questionTextView.text = questionAnswer.question
-            itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(questionAnswer.answer, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(questionAnswer.answer)
-            }
+            itemView.answerTextView.text = HtmlCompat.fromHtml(questionAnswer.answer, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+            itemView.questionTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.questionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
             var isFavorite = questionAnswer.isFavorite == 1
 
@@ -115,23 +125,23 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 itemView.copy.setMinAndMaxFrame(0, 80)
                 itemView.copy.speed = 2.6f
                 itemView.copy.playAnimation()
+                onQuestionCopyIconClick.invoke(questionAnswer.question, questionAnswer.answer)
             }
 
             itemView.share.setOnClickListener {
                 itemView.share.setMinAndMaxFrame(0, 40)
                 itemView.share.speed = 1.5f
                 itemView.share.playAnimation()
+                onQuestionShareIconClick.invoke(questionAnswer.question, questionAnswer.answer)
             }
         }
     }
 
     inner class BookmarksPrefixListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(prefix: Prefix, position: Int) {
-            itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(prefix.text, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(prefix.text)
-            }
+            itemView.prefixTextView.text = HtmlCompat.fromHtml(prefix.text, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+            itemView.prefixTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
             var isFavorite = prefix.isFavorite == 1
 
@@ -158,12 +168,14 @@ class BookmarksListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 itemView.copyPrefix.setMinAndMaxFrame(0, 80)
                 itemView.copyPrefix.speed = 2.6f
                 itemView.copyPrefix.playAnimation()
+                onPrefixCopyIconClick.invoke(prefix.text)
             }
 
             itemView.sharePrefix.setOnClickListener {
                 itemView.sharePrefix.setMinAndMaxFrame(0, 40)
                 itemView.sharePrefix.speed = 1.5f
                 itemView.sharePrefix.playAnimation()
+                onPrefixShareIconClick.invoke(prefix.text)
             }
         }
     }

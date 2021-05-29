@@ -2,20 +2,29 @@ package uz.bismillah.ibadatiislamiya.ui.search
 
 import android.os.Build
 import android.text.Html
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_question_answer.view.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.model.QuestionAnswer
 
 class SearchResultListAdapter : RecyclerView.Adapter<SearchResultListAdapter.SearchResultListViewHolder>() {
+    private var textSize = 18f
+
     var models = listOf<QuestionAnswer>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    fun setTextSize(size: Float) {
+        textSize = size
+        notifyItemChanged(0)
+    }
 
     private var onQuestionFavIconClick: (questionAnswer: QuestionAnswer) -> Unit = {}
     fun setOnQuestionFavIconClickListener(onQuestionFavIconClick: (questionAnswer : QuestionAnswer) -> Unit) {
@@ -46,11 +55,12 @@ class SearchResultListAdapter : RecyclerView.Adapter<SearchResultListAdapter.Sea
     inner class SearchResultListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun populateModel(questionAnswer: QuestionAnswer) {
             itemView.questionTextView.text = questionAnswer.question
-            itemView.answerTextView.text = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Html.fromHtml(questionAnswer.answer, Html.FROM_HTML_MODE_COMPACT)
-            } else {
-                Html.fromHtml(questionAnswer.answer)
-            }
+            itemView.answerTextView.text = HtmlCompat.fromHtml(questionAnswer.answer, HtmlCompat.FROM_HTML_MODE_COMPACT)
+
+            itemView.questionTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.questionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
+            itemView.answerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
             var isFavorite = questionAnswer.isFavorite == 1
 

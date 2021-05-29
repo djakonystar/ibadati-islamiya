@@ -5,28 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/searchAppBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/searchActionBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="ИЗЛЕЎ"
-            app:titleTextColor="@color/white"
-            app:menu="@menu/menu_actionbar_topics"/>
-    </com.google.android.material.appbar.AppBarLayout>
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchAppBar"
+        app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:hintTextColor="@color/app_color"
         app:endIconMode="clear_text"
@@ -63,6 +48,7 @@
             android:id="@+id/keyAInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charA"/>
@@ -76,6 +62,7 @@
             android:id="@+id/keyGInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charG"/>
@@ -89,6 +76,7 @@
             android:id="@+id/keyHInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charH"/>
@@ -102,6 +90,7 @@
             android:id="@+id/keyQInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charQ"/>
@@ -115,6 +104,7 @@
             android:id="@+id/keyNInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charN"/>
@@ -128,6 +118,7 @@
             android:id="@+id/keyOInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charO"/>
@@ -141,6 +132,7 @@
             android:id="@+id/keyUInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charU"/>
@@ -154,6 +146,7 @@
             android:id="@+id/keyWInSearch"
             android:layout_width="wrap_content"
             android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:text="@string/charW"/>
