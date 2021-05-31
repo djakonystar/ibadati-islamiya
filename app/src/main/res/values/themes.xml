@@ -18,4 +18,8 @@
         <item name="android:navigationBarColor">#CACACA</item>
         <item name="fragmentBackgroundColor">@color/white</item>
     </style>
+
+    <style name="TextLabel" parent="TextAppearance.Design.Hint">
+        <item name="android:textSize" tools:ignore="SpUsage">16dp</item>
+    </style>
 </resources>

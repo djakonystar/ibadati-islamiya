@@ -1,5 +1,6 @@
 package uz.bismillah.ibadatiislamiya.ui.search
 
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,18 @@ import kotlinx.android.synthetic.main.item_search.view.*
 import uz.bismillah.ibadatiislamiya.R
 
 class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchListViewHolder>() {
+    private var textSize = 18f
+
     var models = listOf<String>()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    fun setTextSize(size: Float) {
+        textSize = size
+        notifyItemRangeChanged(0, models.size)
+    }
 
     private var onSearchingResultClick: (question: String) -> Unit = {}
     fun setOnSearchingResultClickListener(onSearchingResultClick: (question: String) -> Unit) {
@@ -35,6 +43,7 @@ class SearchListAdapter : RecyclerView.Adapter<SearchListAdapter.SearchListViewH
             val questionRemovedStartTag = question.replace("<p>", " ")
             val questionFinal = questionRemovedStartTag.replace("</p>", "")
             itemView.searchQuestionTextView.text = questionFinal
+            itemView.searchQuestionTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
             itemView.setOnClickListener {
                 onSearchingResultClick.invoke(question)

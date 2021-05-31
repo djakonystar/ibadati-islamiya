@@ -35,4 +35,10 @@
     <string name="search_caps">ИЗЛЕЎ</string>
     <string name="info">Мағлыўмат</string>
     <string name="info_caps">МАҒЛЫЎМАТ</string>
+    <string name="unitOne">БИРИНШИ\nБӨЛИМ</string>
+    <string name="unitTwo">ЕКИНШИ\nБӨЛИМ</string>
+    <string name="unitThree">ҮШИНШИ\nБӨЛИМ</string>
+    <string name="unitFour">ТӨРТИНШИ\nБӨЛИМ</string>
+    <string name="unitFive">БЕСИНШИ\nБӨЛИМ</string>
+    <string name="duwa">ҲӘР ТҮРЛИ\nДУЎАЛАР</string>
 </resources>

@@ -25,10 +25,6 @@ import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 import java.util.*
 
 class TopicFragment : Fragment(R.layout.fragment_topic) {
-    companion object {
-        const val TOPIC_ID = "topicId"
-        const val TOPIC_NAME = "topicName"
-    }
 
     private val adapter = TopicListAdapter()
     private lateinit var dao: TopicDao
@@ -68,7 +64,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
         }
 
         topicSearchEditText.addTextChangedListener {
-            val result : List<Topic> = dao.searchTopicByName((arguments?.getInt(UnitFragment.UNIT_ID) ?: 1), "%${it.toString()}%")
+            val result : List<Topic> = dao.searchTopicByName(unitId, "%${it.toString()}%")
             adapter.models = result
         }
 
@@ -96,9 +92,9 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             R.id.keys -> {
                 keysShown = !keysShown
                 if (keysShown) {
-                    topicKeyPadScrollView.visibility = View.VISIBLE
+                    cyrillicKeyPad.visibility = View.VISIBLE
                 } else {
-                    topicKeyPadScrollView.visibility = View.GONE
+                    cyrillicKeyPad.visibility = View.GONE
                 }
                 true
             }

@@ -14,6 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         app:hintTextColor="@color/app_color"
+        app:hintTextAppearance="@style/TextLabel"
         app:endIconMode="clear_text"
         app:boxCornerRadiusBottomEnd="@dimen/margin_standard"
         app:boxCornerRadiusTopEnd="@dimen/margin_standard"
@@ -25,144 +26,152 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/topicSearchEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:hint="@string/search_by_topic"
             android:inputType="text"
+            android:textSize="16dp"
             android:paddingVertical="12dp"
-            android:drawableStart="@drawable/ic_outline_search_24"/>
+            android:drawableStart="@drawable/ic_outline_search_24"
+            tools:ignore="SpUsage" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ScrollView
-        android:id="@+id/topicKeyPadScrollView"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/cyrillicKeyPad"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/topicSearchBar"
         app:layout_constraintBottom_toTopOf="@id/topicsRecyclerView"
-        android:layout_marginTop="@dimen/margin_eight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:visibility="visible"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
-        <LinearLayout
-            android:id="@+id/cyrillicKeyPad"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/keyA"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/topicSearchBar"
-            app:layout_constraintBottom_toTopOf="@id/topicsRecyclerView"
-            android:visibility="visible"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charA"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyA"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charA"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charG"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyG"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charG"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charH"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyH"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charH"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyQ"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charQ"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyQ"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charQ"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyN"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charN"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyN"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charN"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyO"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charO"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyO"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charO"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyU"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charU"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyU"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charU"/>
+        <View
+            android:layout_width="4dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/transparent"/>
 
-            <View
-                android:layout_width="4dp"
-                android:layout_height="match_parent"
-                android:backgroundTint="@color/transparent"/>
+        <Button
+            android:id="@+id/keyW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="24dp"
+            android:textColor="?attr/iconTintColor"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:text="@string/charW"
+            android:textSize="12dp"
+            tools:ignore="SpUsage"/>
 
-            <Button
-                android:id="@+id/keyW"
-                android:layout_width="wrap_content"
-                android:minWidth="24dp"
-                android:textColor="?attr/iconTintColor"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:text="@string/charW"/>
-
-        </LinearLayout>
-
-    </ScrollView>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/topicsRecyclerView"
@@ -171,8 +180,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topicKeyPadScrollView"
-        android:layout_marginTop="@dimen/margin_eight"
+        app:layout_constraintTop_toBottomOf="@id/cyrillicKeyPad"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
         tools:listitem="@layout/item_topic"/>
