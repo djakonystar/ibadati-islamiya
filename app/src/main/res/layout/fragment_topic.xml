@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="@dimen/margin_eight"
         android:layout_marginTop="@dimen/margin_eight"
-        android:visibility="visible"
+        android:visibility="gone"
         android:orientation="horizontal"
         android:gravity="center"
         android:weightSum="8">
