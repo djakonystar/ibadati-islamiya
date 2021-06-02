@@ -7,7 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -88,7 +88,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun qrKeyPressed(view: View) {
         view.setOnClickListener {
-            searchEditText.text?.insert(searchEditText.selectionStart, (it as Button).text.toString().toLowerCase(Locale.ROOT))
+            searchEditText.text?.insert(searchEditText.selectionStart, (it as TextView).text.toString().toLowerCase(Locale.ROOT))
         }
     }
 }

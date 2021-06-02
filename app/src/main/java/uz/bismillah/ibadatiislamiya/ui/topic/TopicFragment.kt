@@ -7,8 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import androidx.core.os.bundleOf
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,7 +19,6 @@ import uz.bismillah.ibadatiislamiya.data.BookDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.TopicDao
 import uz.bismillah.ibadatiislamiya.data.model.Topic
 import uz.bismillah.ibadatiislamiya.ui.MainActivity
-import uz.bismillah.ibadatiislamiya.ui.questionanswer.QuestionAnswerFragment
 import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 import java.util.*
 
@@ -108,7 +106,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
 
     private fun qrKeyPressed(view: View) {
         view.setOnClickListener {
-            topicSearchEditText.text?.insert(topicSearchEditText.selectionStart, (it as Button).text.toString().toLowerCase(Locale.ROOT))
+            topicSearchEditText.text?.insert(topicSearchEditText.selectionStart, (it as TextView).text.toString().toLowerCase(Locale.ROOT))
         }
     }
 }
