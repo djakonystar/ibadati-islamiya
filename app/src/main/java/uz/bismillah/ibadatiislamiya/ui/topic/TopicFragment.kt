@@ -7,8 +7,7 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import androidx.core.os.bundleOf
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -20,15 +19,10 @@ import uz.bismillah.ibadatiislamiya.data.BookDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.TopicDao
 import uz.bismillah.ibadatiislamiya.data.model.Topic
 import uz.bismillah.ibadatiislamiya.ui.MainActivity
-import uz.bismillah.ibadatiislamiya.ui.questionanswer.QuestionAnswerFragment
 import uz.bismillah.ibadatiislamiya.ui.unit.UnitFragment
 import java.util.*
 
 class TopicFragment : Fragment(R.layout.fragment_topic) {
-    companion object {
-        const val TOPIC_ID = "topicId"
-        const val TOPIC_NAME = "topicName"
-    }
 
     private val adapter = TopicListAdapter()
     private lateinit var dao: TopicDao
@@ -68,7 +62,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
         }
 
         topicSearchEditText.addTextChangedListener {
-            val result : List<Topic> = dao.searchTopicByName((arguments?.getInt(UnitFragment.UNIT_ID) ?: 1), "%${it.toString()}%")
+            val result : List<Topic> = dao.searchTopicByName(unitId, "%${it.toString()}%")
             adapter.models = result
         }
 
@@ -96,9 +90,9 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             R.id.keys -> {
                 keysShown = !keysShown
                 if (keysShown) {
-                    topicKeyPadScrollView.visibility = View.VISIBLE
+                    cyrillicKeyPad.visibility = View.VISIBLE
                 } else {
-                    topicKeyPadScrollView.visibility = View.GONE
+                    cyrillicKeyPad.visibility = View.GONE
                 }
                 true
             }
@@ -112,7 +106,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
 
     private fun qrKeyPressed(view: View) {
         view.setOnClickListener {
-            topicSearchEditText.text?.insert(topicSearchEditText.selectionStart, (it as Button).text.toString().toLowerCase(Locale.ROOT))
+            topicSearchEditText.text?.insert(topicSearchEditText.selectionStart, (it as TextView).text.toString().toLowerCase(Locale.ROOT))
         }
     }
 }

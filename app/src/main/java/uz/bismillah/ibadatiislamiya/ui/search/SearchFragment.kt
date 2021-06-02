@@ -1,11 +1,13 @@
 package uz.bismillah.ibadatiislamiya.ui.search
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,18 +16,22 @@ import kotlinx.android.synthetic.main.fragment_search.*
 import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BookDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.QuestionAnswerDao
+import uz.bismillah.ibadatiislamiya.ui.MainActivity.Companion.TEXT_SIZE
 import java.util.*
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
     private val adapter = SearchListAdapter()
     private lateinit var questionAnswerDao: QuestionAnswerDao
     private var keysShown = false
+    private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
 
         questionAnswerDao = BookDatabase.getInstance(requireContext()).questionAnswerDao()
+
+        preferences = requireActivity().getSharedPreferences("Settings", Context.MODE_PRIVATE)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -33,6 +39,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         searchRecyclerView.adapter = adapter
         searchRecyclerView.addItemDecoration(DividerItemDecoration(requireContext(), DividerItemDecoration.VERTICAL))
+
+        adapter.setTextSize(preferences.getFloat(TEXT_SIZE, 18f))
 
         searchEditText.addTextChangedListener {
             val result: List<String> = questionAnswerDao.searchQuestions("%${it.toString()}%")
@@ -68,9 +76,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             R.id.keys -> {
                 keysShown = !keysShown
                 if (keysShown) {
-                    searchKeyPadScrollView.visibility = View.VISIBLE
+                    cyrillicKeyPadInSearch.visibility = View.VISIBLE
                 } else {
-                    searchKeyPadScrollView.visibility = View.GONE
+                    cyrillicKeyPadInSearch.visibility = View.GONE
                 }
                 true
             }
@@ -80,7 +88,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun qrKeyPressed(view: View) {
         view.setOnClickListener {
-            searchEditText.text?.insert(searchEditText.selectionStart, (it as Button).text.toString().toLowerCase(Locale.ROOT))
+            searchEditText.text?.insert(searchEditText.selectionStart, (it as TextView).text.toString().toLowerCase(Locale.ROOT))
         }
     }
 }

@@ -136,25 +136,21 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
                         R.id.smallTextSetting -> {
                             preferences.edit().putFloat(TEXT_SIZE, 14f).apply()
                             adapter.setTextSize(14f)
-                            Toast.makeText(requireContext(), "Small Clicked", Toast.LENGTH_SHORT).show()
                             true
                         }
                         R.id.normalTextSetting -> {
                             preferences.edit().putFloat(TEXT_SIZE, 18f).apply()
                             adapter.setTextSize(18f)
-                            Toast.makeText(requireContext(), "Normal Clicked", Toast.LENGTH_SHORT).show()
                             true
                         }
                         R.id.largeTextSetting -> {
                             preferences.edit().putFloat(TEXT_SIZE, 22f).apply()
                             adapter.setTextSize(22f)
-                            Toast.makeText(requireContext(), "Large Clicked", Toast.LENGTH_SHORT).show()
                             true
                         }
                         R.id.extraLargeTextSetting -> {
                             preferences.edit().putFloat(TEXT_SIZE, 26f).apply()
                             adapter.setTextSize(26f)
-                            Toast.makeText(requireContext(), "Extra Large Clicked", Toast.LENGTH_SHORT).show()
                             true
                         }
                         else -> false

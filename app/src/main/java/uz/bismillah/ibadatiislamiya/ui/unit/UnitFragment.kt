@@ -17,6 +17,7 @@ import uz.bismillah.ibadatiislamiya.R
 import uz.bismillah.ibadatiislamiya.data.BookDatabase
 import uz.bismillah.ibadatiislamiya.data.dao.TopicDao
 import uz.bismillah.ibadatiislamiya.data.dao.UnitDao
+import uz.bismillah.ibadatiislamiya.data.model.Units
 import uz.bismillah.ibadatiislamiya.ui.MainActivity
 import uz.bismillah.ibadatiislamiya.ui.SpaceItemDecoration
 import uz.bismillah.ibadatiislamiya.ui.questionanswer.QuestionAnswerFragment
@@ -25,19 +26,17 @@ import uz.bismillah.ibadatiislamiya.ui.topic.TopicFragment
 class UnitFragment : Fragment(R.layout.fragment_unit) {
 
     companion object {
-        const val UNIT_ID = "unitId"
-        const val UNIT_NAME = "unitName"
         const val LAST_READ = "last_read"
         const val CURRENT_THEME = "currentTheme"
     }
 
-    private val adapter = UnitListAdapter()
     private lateinit var unitDao: UnitDao
     private lateinit var topicDao: TopicDao
     private lateinit var preferences: SharedPreferences
     private var lastReadTopicId = 0
     private lateinit var lastReadTopic: String
     private var currentTheme: Int = -1
+    private var models = listOf<Units>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +44,8 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
 
         unitDao = BookDatabase.getInstance(requireContext()).unitDao()
         topicDao = BookDatabase.getInstance(requireContext()).topicDao()
+
+        models = unitDao.getAllUnits()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,9 +57,7 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
         lastReadTopicId = preferences.getInt(LAST_READ, 0)
         lastReadTopic = topicDao.getTopicNameById(lastReadTopicId)
 
-        unitsRecyclerView.adapter = adapter
-        unitsRecyclerView.addItemDecoration(SpaceItemDecoration(8))
-        setData()
+        onUnitItemClick()
 
         if (lastReadTopicId == 0) {
             lastReadItem.visibility = View.GONE
@@ -72,40 +71,49 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
                 UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(lastReadTopicId, lastReadTopic)
             )
         }
+    }
 
-        adapter.setOnUnitItemClickListener { id, title ->
-            if (id != 6) {
-                findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(id, title)
-                )
-            } else {
-                preferences.edit().putInt(LAST_READ, 133).apply()
+    private fun onUnitItemClick() {
+        unitOneCard.setOnClickListener {
+            findNavController().navigate(
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[0].id, models[0].name)
+            )
+        }
 
-                findNavController().navigate(
+        unitTwoCard.setOnClickListener {
+            findNavController().navigate(
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[1].id, models[1].name)
+            )
+        }
+
+        unitThreeCard.setOnClickListener {
+            findNavController().navigate(
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[2].id, models[2].name)
+            )
+        }
+
+        unitFourCard.setOnClickListener {
+            findNavController().navigate(
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[3].id, models[3].name)
+            )
+        }
+
+        unitFiveCard.setOnClickListener {
+            findNavController().navigate(
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[4].id, models[4].name)
+            )
+        }
+
+        unitDuwaCard.setOnClickListener {
+            preferences.edit().putInt(LAST_READ, 133).apply()
+
+            findNavController().navigate(
                     UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(133, topicDao.getTopicNameById(133))
-                )
-            }
+            )
         }
     }
 
     // TODO: Theme changer
-    /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_actionbar_with_theme_changer, menu)
-        menu.findItem(R.id.toggleTheme).setOnMenuItemClickListener {
-            if (AppCompatDelegate.MODE_NIGHT_YES == preferences.getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_NO)) {
-                it.icon = resources.getDrawable(R.drawable.ic_theme_light_24)
-                preferences.edit().putInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_NO).apply()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            else {
-                it.icon = resources.getDrawable(R.drawable.ic_theme_night_24)
-                preferences.edit().putInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_YES).apply()
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            }
-            true
-        }
-    } */
-
 //    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 //        return when (item.itemId) {
 //            R.id.toggleTheme -> {
@@ -132,9 +140,24 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
 //            }
 //            else -> false
 //        }
-//    }
 
-    private fun setData() {
-        adapter.models = unitDao.getAllUnits()
-    }
+
+    /* override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_actionbar_with_theme_changer, menu)
+        menu.findItem(R.id.toggleTheme).setOnMenuItemClickListener {
+            if (AppCompatDelegate.MODE_NIGHT_YES == preferences.getInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_NO)) {
+                it.icon = resources.getDrawable(R.drawable.ic_theme_light_24)
+                preferences.edit().putInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_NO).apply()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+            else {
+                it.icon = resources.getDrawable(R.drawable.ic_theme_night_24)
+                preferences.edit().putInt(CURRENT_THEME, AppCompatDelegate.MODE_NIGHT_YES).apply()
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            }
+            true
+        }
+    } */
+
+//    }
 }
