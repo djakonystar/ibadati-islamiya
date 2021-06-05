@@ -63,7 +63,8 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
             val answer3 = answer2.replace("<p>", "\n")
             val answerFinal = answer3.replace("</p>", "")
             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText(question, "$question\n\n$answerFinal\n\n\n\"Ибадати Исламия\" китабынан")
+            val clip = ClipData.newPlainText(question, "$question\n\n$answerFinal\n\n\n\"Ибадати Исламия\" китабынан\n" +
+                    "https://play.google.com/store/apps/details?id=uz.bismillah.ibadatiislamiya")
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireContext(), "Табыслы нусқаланды!", Toast.LENGTH_SHORT).show()
         }
@@ -81,7 +82,8 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
                         "$answerFinal\n" +
                         "\n" +
                         "\n" +
-                        "\"Ибадати Исламия\" китабынан")
+                        "\"Ибадати Исламия\" китабынан\n" +
+                        "https://play.google.com/store/apps/details?id=uz.bismillah.ibadatiislamiya")
                 this.type = "text/plain"
             }
             startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.app_name)))
@@ -97,7 +99,8 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
             val prefix3 = prefix2.replace("<p>", "\n")
             val prefixFinal = prefix3.replace("</p>", "")
             val clipboard = requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clip = ClipData.newPlainText("", "$prefixFinal\n\n\n\"Ибадати Исламия\" китабынан")
+            val clip = ClipData.newPlainText("", "$prefixFinal\n\n\n\"Ибадати Исламия\" китабынан\n" +
+                    "https://play.google.com/store/apps/details?id=uz.bismillah.ibadatiislamiya")
             clipboard.setPrimaryClip(clip)
             Toast.makeText(requireContext(), "Табыслы нусқаланды!", Toast.LENGTH_SHORT).show()
         }
@@ -113,7 +116,8 @@ class QuestionAnswerFragment : Fragment(R.layout.fragment_question_answer) {
                 this.putExtra(Intent.EXTRA_TEXT, "$prefixFinal\n" +
                         "\n" +
                         "\n" +
-                        "\"Ибадати Исламия\" китабынан")
+                        "\"Ибадати Исламия\" китабынан\n" +
+                        "https://play.google.com/store/apps/details?id=uz.bismillah.ibadatiislamiya")
                 this.type = "text/plain"
             }
             startActivity(Intent.createChooser(shareIntent, resources.getString(R.string.app_name)))
