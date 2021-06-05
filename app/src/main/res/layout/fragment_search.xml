@@ -27,7 +27,7 @@
             android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="@string/search_by_topic"
+            android:hint="@string/search_by_questions"
             android:inputType="text"
             android:paddingVertical="12dp"
             android:drawableStart="@drawable/ic_outline_search_24"
