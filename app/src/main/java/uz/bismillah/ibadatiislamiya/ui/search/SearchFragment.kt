@@ -52,6 +52,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         adapter.setOnSearchingResultClickListener {
+            searchEditText.clearFocus()
             findNavController().navigate(
                 SearchFragmentDirections.actionSearchFragmentToSearchResultFragment(it)
             )

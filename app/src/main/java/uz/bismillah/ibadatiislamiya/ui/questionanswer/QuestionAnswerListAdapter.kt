@@ -92,7 +92,25 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
             itemView.answerTitle.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
             itemView.answerTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSize)
 
-            var isFavorite = questionAnswer.isFavorite == 1
+            setBookmarkStatus(questionAnswer, false)
+            itemView.copy.progress = 0.67f
+            itemView.share.progress = 0.67f
+
+            itemView.addToBookmark.setOnClickListener {
+                onQuestionFavIconClick.invoke(questionAnswer)
+                itemView.addToBookmark.apply {
+                    if (questionAnswer.isFavorite == 1) {
+                        speed = 1f
+                    } else {
+                        speed = -1.7f
+                        setMinAndMaxFrame(0, 22)
+                    }
+                    playAnimation()
+                }
+                setBookmarkStatus(questionAnswer, true)
+            }
+
+            /* var isFavorite = questionAnswer.isFavorite == 1
 
             if (isFavorite) {
                 itemView.addToBookmark.progress = 0.44f
@@ -113,7 +131,7 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                 }
                 isFavorite = !isFavorite
                 onQuestionFavIconClick.invoke(questionAnswer)
-            }
+            } */
 
             itemView.copy.setOnClickListener {
                 itemView.copy.setMinAndMaxFrame(0, 80)
@@ -127,6 +145,22 @@ class QuestionAnswerListAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(
                 itemView.share.speed = 1.5f
                 itemView.share.playAnimation()
                 onQuestionShareIconClick.invoke(questionAnswer.question, questionAnswer.answer)
+            }
+        }
+
+        private fun setBookmarkStatus(questionAnswer: QuestionAnswer, clicked: Boolean) {
+            itemView.addToBookmark.apply {
+                if (questionAnswer.isFavorite == 1) {
+                    speed = 1f
+                    setMinAndMaxFrame(0, 22)
+                } else if (clicked) {
+                    speed = -1.7f
+                    setMinAndMaxFrame(0, 22)
+                } else if (!clicked) {
+                    speed = -1.7f
+                    setMinAndMaxFrame(0, 1)
+                }
+                playAnimation()
             }
         }
     }
