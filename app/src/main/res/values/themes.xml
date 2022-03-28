@@ -17,6 +17,8 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:navigationBarColor">#CACACA</item>
         <item name="fragmentBackgroundColor">@color/white</item>
+        <item name="android:splitMotionEvents">false</item>
+        <item name="android:windowEnableSplitTouch">false</item>
     </style>
 
     <style name="TextLabel" parent="TextAppearance.Design.Hint">

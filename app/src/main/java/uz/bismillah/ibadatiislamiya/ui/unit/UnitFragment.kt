@@ -68,7 +68,7 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
 
         lastReadItem.setOnClickListener {
             findNavController().navigate(
-                UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(lastReadTopicId, lastReadTopic)
+                UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(topicId = lastReadTopicId, topicName = lastReadTopic)
             )
         }
     }
@@ -76,31 +76,31 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
     private fun onUnitItemClick() {
         unitOneCard.setOnClickListener {
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[0].id, models[0].name)
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(unitId = models[0].id, unitName = models[0].name)
             )
         }
 
         unitTwoCard.setOnClickListener {
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[1].id, models[1].name)
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(unitId = models[1].id, unitName = models[1].name)
             )
         }
 
         unitThreeCard.setOnClickListener {
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[2].id, models[2].name)
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(unitId = models[2].id, unitName = models[2].name)
             )
         }
 
         unitFourCard.setOnClickListener {
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[3].id, models[3].name)
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(unitId = models[3].id, unitName = models[3].name)
             )
         }
 
         unitFiveCard.setOnClickListener {
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(models[4].id, models[4].name)
+                    UnitFragmentDirections.actionUnitFragmentToTopicFragment(unitId = models[4].id, unitName = models[4].name)
             )
         }
 
@@ -108,7 +108,7 @@ class UnitFragment : Fragment(R.layout.fragment_unit) {
             preferences.edit().putInt(LAST_READ, 133).apply()
 
             findNavController().navigate(
-                    UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(133, topicDao.getTopicNameById(133))
+                    UnitFragmentDirections.actionUnitFragmentToQuestionAnswerFragment(topicId = 133, topicName = topicDao.getTopicNameById(133))
             )
         }
     }

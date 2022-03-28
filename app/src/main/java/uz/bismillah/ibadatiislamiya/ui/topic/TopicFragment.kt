@@ -57,7 +57,7 @@ class TopicFragment : Fragment(R.layout.fragment_topic) {
             preferences.edit().putInt(UnitFragment.LAST_READ, id).apply()
 
             findNavController().navigate(
-                TopicFragmentDirections.actionTopicFragmentToQuestionAnswerFragment(id, title)
+                TopicFragmentDirections.actionTopicFragmentToQuestionAnswerFragment(topicId = id, topicName = title)
             )
         }
 
